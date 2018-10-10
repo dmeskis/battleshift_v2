@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def update
     service = UserService.new(user_params)
     service.update_user
-    user = User.new(service.find_user)
+    user = UserLogic.new(user_params).single_user
     if user
       flash[:success] = "Successfully updated #{user.name}."
     else
