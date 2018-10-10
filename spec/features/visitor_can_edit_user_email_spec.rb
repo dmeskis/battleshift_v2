@@ -14,19 +14,22 @@ describe 'as a visitor' do
       expect(current_path).to eq("/users/1/edit")
     end
     it 'lets visitor edit a user' do
-      # file = File.open("./fixtures/multiple_users.json")
-      # stub_request(:get, "http://localhost:3000/api/v1/users").
-      #   to_return(body: file, status: 200)
+      file = File.open("./fixtures/multiple_users.json")
+      stub_request(:patch, "http://localhost:3000/api/v1/users/1/edit").
+        to_return(body: file, status: 200)
 
       visit "/users/1/edit"
       fill_in :email, with: "josiah@example.com"
       click_on "Save"
 
+      should have_requested(:patch, "http://localhost:3000/api/v1/users/1").
+        with(:body => "email=josiah@example.com").once
+
       expect(current_path).to eq("/users")
       within(".user-1") do
         expect(page).to have_content("josiah@example.com")
       end
-      save_and_open_page
+
       expect(page).to have_content("Successfully updated Josiah Bartlet.")
     end
   end
