@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
 
   def show
-    service = UserService.new(params)
-    @user = User.new(service.find_user)
+    @user = UserLogic.new(user_params).single_user
   end
 
   def index
-    service = UserService.new(params)
-    users = service.all_users
-    @users = users.map {|user| User.new(user)}
+    @users = UserLogic.new(user_params).many_users
   end
 
   def edit
-    service = UserService.new(params)
-    @user = User.new(service.find_user)
+    @user = UserLogic.new(user_params).single_user
   end
 
   def update
-    service = UserService.new(params)
+    service = UserService.new(user_params)
     service.update_user
     user = User.new(service.find_user)
     if user
@@ -27,4 +23,9 @@ class UsersController < ApplicationController
     end
     redirect_to users_path
   end
+
+  private
+    def user_params
+      params.permit(:id, :name, :email)
+    end
 end
