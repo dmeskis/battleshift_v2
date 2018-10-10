@@ -26,6 +26,7 @@ describe 'as a visitor' do
       within(".user-1") do
         expect(page).to have_content("josiah@example.com")
       end
+      save_and_open_page
       expect(page).to have_content("Successfully updated Josiah Bartlet.")
     end
   end

@@ -8,6 +8,16 @@ module Api
       def show
         render json: User.find(params[:id])
       end
+
+      def update
+        user = User.update(params[:id], user_params)
+        render json: user
+      end
+
+      private
+        def user_params
+          params.permit(:id, :name, :email)
+        end
     end
   end
 end
