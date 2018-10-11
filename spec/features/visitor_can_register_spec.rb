@@ -9,13 +9,15 @@ describe 'on the landing page' do
 
       visit '/'
       click_on "Register"
-      fill_in :email_address, with: email
-      fill_in :username, with: username
-      fill_in :password, with: password
-      fill_in :password_confirmation, with: password
+      fill_in :user_email, with: email
+      fill_in :user_name, with: username
+      fill_in :user_password, with: password
+      fill_in :user_password_confirmation, with: password
       click_on "Submit"
 
+      expect(User.count).to eq(1)
       expect(current_path).to eq(dashboard_path)
+      expect(page).to have_content("Account successfully created!")
       expect(page).to have_content("Logged in as #{username}")
       expect(page).to have_content("This account has not yet been activated. Please check your email.")
     end

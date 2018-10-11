@@ -1,19 +1,19 @@
 class UsersController < ApplicationController
 
   def show
-    @user = UserLogic.new(user_params).single_user
+    @user = UserLogic.new(params).single_user
   end
 
   def index
-    @users = UserLogic.new(user_params).many_users
+    @users = UserLogic.new(params).many_users
   end
 
   def edit
-    @user = UserLogic.new(user_params).single_user
+    @user = UserLogic.new(params).single_user
   end
 
   def update
-    user_logic = UserLogic.new(user_params)
+    user_logic = UserLogic.new(params)
     user = user_logic.single_user
     if user_logic.update_user
       flash[:success] = "Successfully updated #{user.name}."
@@ -27,8 +27,19 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      flash[:success] = "Account succesfully created!"
+      redirect_to dashboard_path
+    else
+      flash[:failure] = "Failed to register. Please try again."
+      render :new
+    end
+  end
+
   private
     def user_params
-      params.permit(:id, :name, :email)
+      params.require(:user).permit(:id, :name, :email, :password)
     end
 end
