@@ -22,6 +22,6 @@ class UserLogic
 
   private
     def service
-      UserService.new(params)
+      UserService.new(@params)
     end
 end

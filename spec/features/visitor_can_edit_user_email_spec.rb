@@ -22,8 +22,10 @@ describe 'as a visitor' do
       fill_in :email, with: "josiah@example.com"
       click_on "Save"
 
+      # This should have request has %40 because that is the URL-encoded version
+      # for the @ character.
       should have_requested(:patch, "http://localhost:3000/api/v1/users/1").
-        with(:body => "email=josiah@example.com").once
+        with(:body => "email=josiah%40example.com").once
 
       expect(current_path).to eq("/users")
       within(".user-1") do
