@@ -4,7 +4,7 @@ describe 'as a visitor' do
   describe 'on a users show page' do
     it 'lets visitor click edit where they are taken to that users edit page' do
       file = File.open("./fixtures/multiple_users.json")
-      stub_request(:get, "http://localhost:3000/api/v1/users").
+      stub_request(:get, "https://polar-refuge-52259.herokuapp.com/api/v1/users").
         to_return(body: file, status: 200)
 
       visit "/users"
@@ -15,7 +15,7 @@ describe 'as a visitor' do
     end
     it 'lets visitor edit a user' do
       file = File.open("./fixtures/multiple_users.json")
-      stub_request(:patch, "http://localhost:3000/api/v1/users/1/edit").
+      stub_request(:patch, "https://polar-refuge-52259.herokuapp.com/api/v1/users/1/edit").
         to_return(body: file, status: 200)
 
       visit "/users/1/edit"
@@ -25,7 +25,7 @@ describe 'as a visitor' do
       # This should have request has %40 because that is the URL-encoded version
       # for the @ character. Faraday is sending our patch request with the URL-
       # encoded body so it translates it to %40.
-      should have_requested(:patch, "http://localhost:3000/api/v1/users/1").
+      should have_requested(:patch, "https://polar-refuge-52259.herokuapp.com/api/v1/users/1").
         with(:body => "email=josiah%40example.com").once
 
       expect(current_path).to eq("/users")
