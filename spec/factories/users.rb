@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :user do
-    name { "Josiah Bartlet" }
-    email { "jbartlet@example.com" }
-    address { "1600 Pennsylvania Ave NW, Washington, DC 20500" }
-    phone { 555555555 }
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    address { Faker::Address.full_address }
+    phone { Faker::PhoneNumber.phone_number }
+    password {Faker::Internet.password}
   end
 end
