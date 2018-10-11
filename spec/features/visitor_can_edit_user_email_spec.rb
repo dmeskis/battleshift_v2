@@ -23,7 +23,8 @@ describe 'as a visitor' do
       click_on "Save"
 
       # This should have request has %40 because that is the URL-encoded version
-      # for the @ character.
+      # for the @ character. Faraday is sending our patch request with the URL-
+      # encoded body so it translates it to %40. 
       should have_requested(:patch, "http://localhost:3000/api/v1/users/1").
         with(:body => "email=josiah%40example.com").once
 
