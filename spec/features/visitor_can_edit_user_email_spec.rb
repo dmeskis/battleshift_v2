@@ -14,12 +14,9 @@ describe 'as a visitor' do
       expect(current_path).to eq("/users/1/edit")
     end
     it 'lets visitor edit a user' do
-      file = File.open("./fixtures/multiple_users.json")
-      stub_request(:patch, "https://polar-refuge-52259.herokuapp.com/api/v1/users/1/edit").
-        to_return(body: file, status: 200)
-
       visit "/users/1/edit"
       fill_in :email, with: "josiah@example.com"
+
       click_on "Save"
 
       # This should have request has %40 because that is the URL-encoded version
