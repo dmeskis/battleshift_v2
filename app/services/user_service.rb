@@ -13,7 +13,7 @@ class UserService
   end
 
   def update_user
-    conn.patch "/api/v1/users/#{@filter[:id]}", "email=#{@filter[:email]}"
+    conn.patch "/api/v1/users/#{@filter[:id]}", { :email => @filter[:email] }
   end
 
 
@@ -21,6 +21,8 @@ class UserService
 
   def conn
     Faraday.new(url: "http://localhost:3000") do |faraday|
+      faraday.request  :url_encoded
+      faraday.response :logger
       faraday.adapter Faraday.default_adapter
     end
   end

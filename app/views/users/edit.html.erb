@@ -1,0 +1,5 @@
+<%= form_with url: user_path, method: :patch do |f| %>
+<%= f.label :email %>
+<%= f.text_field :email %>
+<%= f.submit "Save" %>
+<% end %>
