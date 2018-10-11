@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Account succesfully created!"
+      flash[:success] = "Account successfully created!"
       redirect_to dashboard_path
     else
       flash[:failure] = "Failed to register. Please try again."
