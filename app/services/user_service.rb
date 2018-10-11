@@ -13,7 +13,7 @@ class UserService
   end
 
   def update_user
-    conn.patch "/api/v1/users/#{@filter[:id]}", { :email => @filter[:email]}
+    conn.patch "/api/v1/users/#{@filter[:id]}", { :email => @filter[:email] }
   end
 
 

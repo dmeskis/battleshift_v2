@@ -24,7 +24,7 @@ describe 'as a visitor' do
 
       # This should have request has %40 because that is the URL-encoded version
       # for the @ character. Faraday is sending our patch request with the URL-
-      # encoded body so it translates it to %40. 
+      # encoded body so it translates it to %40.
       should have_requested(:patch, "http://localhost:3000/api/v1/users/1").
         with(:body => "email=josiah%40example.com").once
 
@@ -37,21 +37,3 @@ describe 'as a visitor' do
     end
   end
 end
-
-# Title: Build PATCH /api/v1/users/:id
-#
-# API should only support changing a users's email address
-# Title: Edit a user's email address (dogfooding PATCH /api/v1/users/:id)
-#
-# Background: There is a user stored in the database with an id of 1, name of Josiah Bartlet, email of jbartlet@example.com
-#
-# As a guest user
-# When I visit "/users"
-# And I click on `Edit` for Josiah Bartlet
-# Then I should be on "/users/1/edit"
-#
-# When I fill in the email field with "josiah@example.com"
-# And I click "Save"
-# Then I should be on "/users"
-# And I should see a flash message that says "Successfully updated Josiah Bartlet."
-# And I should should see Josiah Bartlet's email show up in the list as "josiah@example.com"
