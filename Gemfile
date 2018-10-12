@@ -27,6 +27,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'faker'
+  gem 'capybara-email'
 end
 
 group :test do
