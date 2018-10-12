@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index'
   get '/dashboard', to: 'dashboard#index'
   resources :users, only: [:show, :index, :edit, :update, :create, :new]
+  resources :account_activations, only: [:edit]
 end
