@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Account successfully created!"
+      session[:user_id] = @user.id
       redirect_to dashboard_path
     else
       flash[:failure] = "Failed to register. Please try again."
