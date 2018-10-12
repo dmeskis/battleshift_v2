@@ -34,7 +34,6 @@ describe 'on the landing page' do
       fill_in :user_password_confirmation, with: "123"
       click_on "Submit"
 
-      expect(current_path).to eq(new_user_path)
       expect(page).to have_content("Failed to register. Please try again.")
     end
   end
