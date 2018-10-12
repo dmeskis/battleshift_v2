@@ -14,8 +14,8 @@ class UsersController < ApplicationController
 
   def update
     user_logic = UserLogic.new(params)
-    user = user_logic.single_user
     if user_logic.update_user
+      user = user_logic.single_user
       flash[:success] = "Successfully updated #{user.name}."
     else
       flash[:failure] = "Failed to update user."
