@@ -9,11 +9,21 @@ require 'support/factory_bot'
 require 'database_cleaner'
 require 'webmock/rspec'
 require 'vcr'
+require 'faker'
 
 VCR.configure do |config|
   config.cassette_library_dir = "fixtures/cassettes"
   config.hook_into :webmock
   config.allow_http_connections_when_no_cassette = true
+end
+
+require 'shoulda/matchers'
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+  with.test_framework :rspec
+  with.library :rails
+  end
 end
 
 

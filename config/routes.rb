@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show, :update]
     end
   end
-
-  resources :users, only: [:show, :index, :edit, :update]
+  get '/', to: 'welcome#index'
+  get '/dashboard', to: 'dashboard#index'
+  resources :users, only: [:show, :index, :edit, :update, :create, :new]
 end
