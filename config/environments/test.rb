@@ -26,6 +26,9 @@ Rails.application.configure do
   config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment.
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.perform_caching = false
 
