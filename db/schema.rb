@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20181012180549) do
     t.integer "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remember_digest"
     t.string "activation_digest"
     t.integer "activated", default: 0
     t.datetime "activated_at"
