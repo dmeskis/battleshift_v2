@@ -9,14 +9,14 @@ RSpec.describe User, type: :model do
     it 'is is unactivated upon creation' do
       user = create(:user)
 
-      expect(user.status).to eq("unactivated")
+      expect(user.activated).to eq("unactivated")
       expect(user.activated?).to be_falsey
     end
 
     it 'can be activated' do
-      user = create(:user, status: 1)
+      user = create(:user, activated: 1)
 
-      expect(user.status).to eq("activated")
+      expect(user.activated).to eq("activated")
       expect(user.activated?).to be_truthy
     end
   end
