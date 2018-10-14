@@ -8,10 +8,4 @@ class ApplicationController < ActionController::Base
     render file: "/public/404" unless current_user
   end
 
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
-  end
-
 end
