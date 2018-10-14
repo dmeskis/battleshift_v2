@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   before_save   :downcase_email
-  before_create :create_activation_digest
+  before_create :create_activation_digest, :create_api_key
 
   validates :name, uniqueness: true, presence: true
   validates_presence_of :password, on: :create
@@ -43,5 +43,9 @@ class User < ApplicationRecord
     def create_activation_digest
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+
+    def create_api_key
+      self.api_key = SecureRandom.random_number(10000000)
     end
 end
