@@ -13,9 +13,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    user_logic = BattleshiftApi::User.new(params)
-    if user_logic.update_user
-      user = user_logic.single_user
+    user = BattleshiftApi::User.new(params)
+    if user.update_user
+      user = user.single_user
       flash[:success] = "Successfully updated #{user.name}."
     else
       flash[:failure] = "Failed to update user."
