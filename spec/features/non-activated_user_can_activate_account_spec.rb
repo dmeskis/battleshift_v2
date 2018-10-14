@@ -18,12 +18,12 @@ describe 'non-activated user' do
       click_on "Submit"
 
       expect(ActionMailer::Base.deliveries.size).to eq(1)
-      expect(User.count).to eq(1)
       user = User.first
       expect(user.activated?).to eq(false)
-
       open_email('bob@mail.com')
       current_email.click_link "Activate"
+      expect(current_email).to have_content("Here is your unique API key")
+      expect(current_email).to have_content(user.api_key)
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("Status: Active")
       updated_user = User.first

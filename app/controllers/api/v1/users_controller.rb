@@ -11,7 +11,7 @@ module Api
 
       def update
         user = User.update(params[:id], user_params)
-        render json: user
+        render json: user, status: 204
       end
 
       private
