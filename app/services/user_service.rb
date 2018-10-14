@@ -20,7 +20,7 @@ class UserService
   private
 
   def conn
-    Faraday.new(url: "https://polar-refuge-52259.herokuapp.com") do |faraday|
+    Faraday.new(url: ENV["ROOT_URL"]) do |faraday|
       faraday.request  :url_encoded
       faraday.response :logger
       faraday.adapter Faraday.default_adapter
