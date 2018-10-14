@@ -17,6 +17,7 @@ describe 'on the landing page' do
 
       expect(User.count).to eq(1)
       expect(current_path).to eq(dashboard_path)
+      save_and_open_page
       expect(page).to have_content("Account successfully created!")
       expect(page).to have_content("Logged in as #{username}")
       expect(page).to have_content("This account has not yet been activated. Please check your email.")

@@ -28,6 +28,7 @@ group :development, :test do
   gem 'launchy'
   gem 'faker'
   gem 'capybara-email'
+  gem 'show_me_the_cookies'
 end
 
 group :test do
