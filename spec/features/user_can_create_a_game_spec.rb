@@ -11,7 +11,6 @@ describe 'user can create a game' do
       visit new_game_path
       select user_2.email, from: "email"
       click_on "Create Game"
-
     end
   end
 end
