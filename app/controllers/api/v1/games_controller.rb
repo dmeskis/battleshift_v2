@@ -25,8 +25,11 @@ module Api
                         opponent: opponent
                       }
         game = Game.new(game_attributes)
-        game.save
-        render json: game
+        if game.save
+          render json: game, status: 200
+        else
+          render status: 400
+        end
       end
     end
   end

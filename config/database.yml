@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: battleship_web_production
-  username: battleship_web
+  username: dylan
   password: <%= ENV['BATTLESHIP_WEB_DATABASE_PASSWORD'] %>
