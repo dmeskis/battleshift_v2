@@ -8,7 +8,7 @@ module Api
                                        start_space: "A1",
                                        end_space: "A2"
                                       )
-          if ship_placer.run
+          ship_placer.run
 
         end
       end
