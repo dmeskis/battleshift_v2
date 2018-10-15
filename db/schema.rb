@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20181014195255) do
     t.string "activation_digest"
     t.integer "activated", default: 0
     t.datetime "activated_at"
-    t.integer "api_key"
+    t.string "api_key"
   end
 
   add_foreign_key "games", "users", column: "challenger_id"

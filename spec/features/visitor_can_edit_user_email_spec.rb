@@ -16,7 +16,6 @@ feature 'Guest user sees edits email for one user' do
 
     fill_in :email, with: email
     click_on 'Save'
-    save_and_open_page
     expect(current_path).to eq("/users")
     expect(page).to have_content("Successfully updated Josiah Bartlet")
     within(".user-1") do
