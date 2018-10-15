@@ -11,7 +11,6 @@ module Api
       end
 
       def create
-        binding.pry
         game = Game.find_by(id: params[:id])
         render json: game
       end

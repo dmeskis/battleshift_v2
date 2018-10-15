@@ -9,7 +9,7 @@ describe 'user can create a game' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit new_game_path
-
+      save_and_open_page
       select user_2.email, from: "user_list"
       click_on "Create Game"
 

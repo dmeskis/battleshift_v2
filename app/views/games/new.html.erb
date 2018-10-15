@@ -1,0 +1,5 @@
+Hi
+<%= form_for @game do |f| %>
+  <%= f.collection_select(:email, @users, :id, :email) %>
+  <%= f.submit "Create Game" %>
+<% end %>

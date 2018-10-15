@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index'
   resources :users, only: [:show, :index, :edit, :update, :create, :new]
   resources :account_activations, only: [:edit]
+  resources :games, only: [:new, :create]
 end
