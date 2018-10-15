@@ -11,7 +11,16 @@ module Api
       end
 
       def create
-        game = Game.new()
+        player_1_board = Board.new(4)
+        player_2_board = Board.new(4)
+        game_attributes = {
+                        player_1_board: player_1_board,
+                        player_2_board: player_2_board,
+                        player_1_turns: 0,
+                        player_2_turns: 0,
+                        current_turn: "challenger"
+                      }
+        game = Game.new(game_attributes)
         render json: game
       end
     end
