@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        challenger = User.find(params[:user_id])
+        challenger = User.find_by(api_key: request.headers['X-Api-Key'])
         opponent = User.find_by(email: params[:opponent_email])
         player_1_board = Board.new(4)
         player_2_board = Board.new(4)
