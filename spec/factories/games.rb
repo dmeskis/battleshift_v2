@@ -6,5 +6,7 @@ FactoryBot.define do
     player_1_turns { 0 }
     player_2_turns { 0 }
     current_turn { "challenger" }
+    association :challenger, factory: :user
+    association :opponent, factory: :user
   end
 end
