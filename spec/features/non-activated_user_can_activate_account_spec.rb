@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'non-activated user' do
   describe 'clicks validation link in email' do
-    xit 'takes user to a page confirming your account is activated' do
+    it 'takes user to a page confirming your account is activated' do
       ActionMailer::Base.deliveries.clear
 
       username = "Bob"
