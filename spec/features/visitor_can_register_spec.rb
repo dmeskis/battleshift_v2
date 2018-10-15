@@ -9,6 +9,9 @@ describe 'on the landing page' do
 
       visit '/'
       click_on "Register"
+      
+      expect(current_path).to eq(register_path)
+      
       fill_in :user_email, with: email
       fill_in :user_name, with: username
       fill_in :user_password, with: password
@@ -28,6 +31,9 @@ describe 'on the landing page' do
 
       visit '/'
       click_on "Register"
+      
+      expect(current_path).to eq(register_path)
+      
       fill_in :user_email, with: email
       fill_in :user_name, with: username
       fill_in :user_password, with: password
