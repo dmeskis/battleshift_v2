@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        game = Game.find_by(id: params[:id])
+        game = Game.new()
         render json: game
       end
     end
