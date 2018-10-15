@@ -11,6 +11,9 @@ module Api
       end
 
       def create
+        challenger = User.find(params[:user_id])
+        opponent = User.find_by(email: params[:opponent_email])
+        binding.pry
         player_1_board = Board.new(4)
         player_2_board = Board.new(4)
         game_attributes = {

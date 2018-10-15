@@ -1,5 +1,4 @@
-Hi
-<%= form_for @game do |f| %>
-  <%= f.collection_select(:email, @users, :id, :email) %>
+<%= form_with url: games_path do |f| %>
+  <%= f.collection_select(:email, @users, :email, :email) %>
   <%= f.submit "Create Game" %>
 <% end %>
