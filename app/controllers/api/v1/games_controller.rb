@@ -29,6 +29,7 @@ module Api
           render json: game, status: 200
         else
           render status: 400
+        end
       end
     end
   end
