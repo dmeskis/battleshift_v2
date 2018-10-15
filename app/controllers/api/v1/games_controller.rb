@@ -9,6 +9,12 @@ module Api
           render status: 400
         end
       end
+
+      def create
+        binding.pry
+        game = Game.find_by(id: params[:id])
+        render json: game
+      end
     end
   end
 end
