@@ -21,6 +21,7 @@ module Api
                         current_turn: "challenger"
                       }
         game = Game.new(game_attributes)
+        game.save
         render json: game
       end
     end
