@@ -13,7 +13,6 @@ module Api
       def create
         challenger = User.find(params[:user_id])
         opponent = User.find_by(email: params[:opponent_email])
-        binding.pry
         player_1_board = Board.new(4)
         player_2_board = Board.new(4)
         game_attributes = {
@@ -21,7 +20,9 @@ module Api
                         player_2_board: player_2_board,
                         player_1_turns: 0,
                         player_2_turns: 0,
-                        current_turn: "challenger"
+                        current_turn: "challenger",
+                        challenger: challenger,
+                        opponent: opponent
                       }
         game = Game.new(game_attributes)
         game.save
