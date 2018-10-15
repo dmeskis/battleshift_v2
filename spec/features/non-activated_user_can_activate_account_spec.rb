@@ -16,7 +16,6 @@ describe 'non-activated user' do
       fill_in :user_password, with: password
       fill_in :user_password_confirmation, with: password
       click_on "Submit"
-
       expect(ActionMailer::Base.deliveries.size).to eq(1)
       user = User.first
       expect(user.activated?).to eq(false)
