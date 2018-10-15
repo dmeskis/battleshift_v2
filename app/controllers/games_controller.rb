@@ -6,7 +6,7 @@ class GamesController < ApplicationController
 
   def create
     conn =     Faraday.new(url: ENV["ROOT_URL"]) do |faraday|
-                faraday.headers['X-Api-Key'] = current_user.api_key.to_s
+                faraday.headers['X-Api-Key'] = current_user.api_key
                 faraday.request  :url_encoded
                 faraday.response :logger
                 faraday.adapter Faraday.default_adapter
