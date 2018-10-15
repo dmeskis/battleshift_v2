@@ -22,8 +22,12 @@ ActiveRecord::Schema.define(version: 20181014195255) do
     t.integer "player_1_turns"
     t.integer "player_2_turns"
     t.integer "current_turn"
+    t.bigint "challenger_id"
+    t.bigint "opponent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["challenger_id"], name: "index_games_on_challenger_id"
+    t.index ["opponent_id"], name: "index_games_on_opponent_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,7 +42,9 @@ ActiveRecord::Schema.define(version: 20181014195255) do
     t.string "activation_digest"
     t.integer "activated", default: 0
     t.datetime "activated_at"
-    t.integer "api_key"
+    t.string "api_key"
   end
 
+  add_foreign_key "games", "users", column: "challenger_id"
+  add_foreign_key "games", "users", column: "opponent_id"
 end

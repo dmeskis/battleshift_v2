@@ -8,6 +8,7 @@ class User < ApplicationRecord
   enum activated: %w(unactivated activated)
 
   has_secure_password
+  has_many :games
 
   def User.new_token
     SecureRandom.urlsafe_base64
@@ -46,6 +47,6 @@ class User < ApplicationRecord
     end
 
     def create_api_key
-      self.api_key = SecureRandom.random_number(10000000)
+      self.api_key = SecureRandom.urlsafe_base64
     end
 end

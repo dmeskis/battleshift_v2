@@ -7,4 +7,7 @@ class Game < ApplicationRecord
 
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
+
+  belongs_to :challenger, class_name: "User", foreign_key: :challenger_id
+  belongs_to :opponent, class_name: "User", foreign_key: :opponent_id
 end
