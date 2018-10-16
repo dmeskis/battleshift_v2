@@ -29,10 +29,11 @@ class ShipPlacer
   end
 
   def place_in_row
+    binding.pry
     row = start_space[0]
     range = start_space[1]..end_space[1]
     msg = "Ship size must be equal to the number of spaces you are trying to fill."
-    raise InvalidShipPlacement unless range.count == ship.length
+    raise InvalidShipPlacement unless range.count.to_s == ship.length
     range.each { |column| place_ship(row, column) }
   end
 
