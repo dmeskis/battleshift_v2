@@ -55,8 +55,10 @@ class TurnProcessor
   def player_turns
     if @player == game.challenger
       game.player_1_turns += 1
+      game.current_turn = 'opponent'
     elsif @player == game.opponent
       game.player_2_turns += 1
+      game.current_turn = 'challenger'
     end
   end
 
