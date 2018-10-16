@@ -1,8 +1,7 @@
 Hi <%= @user.name %>
 
 Please click the link below to activate your account.
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token, email: @user.email) %>
 
-<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
-                                                    email: @user.email) %>
 Here is your unique API key to use for making API calls: <p>
 <%= @user.api_key %>
