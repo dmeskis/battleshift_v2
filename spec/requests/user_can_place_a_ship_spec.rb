@@ -15,7 +15,7 @@ describe 'user can place a ship' do
                                                       start_space: "A1",
                                                       end_space: "A3"
                                                     }, headers: { "X-Api-Key" => game.challenger.api_key}
-
+      expect(response.body).to include("Successfully placed ship with a size of 3")
     end
   end
 end

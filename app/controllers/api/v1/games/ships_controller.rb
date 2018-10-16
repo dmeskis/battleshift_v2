@@ -6,20 +6,18 @@ module Api
         def create
           @game = Game.find(params[:game_id])
           players_board
-          
-          if params[:ship_size] == 3
+          if params[:ship_size].to_s == "3"
             remaining_ships = 1
             size = 2
-            elsif params[:ship_size] == 2
+          elsif params[:ship_size].to_s == "2"
             remaining_ships = 0
           end
-
-          if ship_placer.run && params[:ship_size] == 3
-            game = Game.find(params[:game_id])
-            render json: game, message: "Successfully placed ship with a size of #{params[:ship_size]}. You have #{remaining_ships} ship(s) to place with a size of #{size}."
-          elsif params[:ship_size] == 2
-            game = Game.find(params[:game_id])
-            render json: game, message: "Successfully placed ship with a size of #{params[:ship_size]}. You have #{remaining_ships} ship(s) to place."
+          if ship_placer.run && params[:ship_size].to_s == "3"
+            @game.save
+            render json: @game, message: "Successfully placed ship with a size of #{params[:ship_size]}. You have #{remaining_ships} ship(s) to place with a size of #{size}."
+          elsif params[:ship_size].to_s == "2"
+            @game.save
+            render json: @game, message: "Successfully placed ship with a size of #{params[:ship_size]}. You have #{remaining_ships} ship(s) to place."
           else
             render status: 400
           end
