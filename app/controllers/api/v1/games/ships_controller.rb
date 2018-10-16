@@ -6,7 +6,7 @@ module Api
         def create
           @game = Game.find(params[:game_id])
           players_board
-
+          
           if params[:ship_size] == 3
             remaining_ships = 1
             size = 2
