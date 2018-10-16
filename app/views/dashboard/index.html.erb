@@ -1,9 +1,9 @@
 <% if @user %>
 Logged in as <%= @user.name %>
 <% end %>
-<% if @user.activated? == false %>
-This account has not yet been activated. Please check your email.
-<% end %>
+
 <% if @user.activated? == true %>
-Status: Active
+  Status: Active
+  <% else %>
+    This account has not yet been activated. Please check your email.
 <% end %>
