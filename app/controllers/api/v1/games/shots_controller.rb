@@ -8,11 +8,19 @@ module Api
           if game.current_turn == "challenger" && player == game.challenger
             turn_processor = TurnProcessor.new(game, params[:shot][:target], player)
             turn_processor.run!
-            render json: game, message: turn_processor.message
+            if turn_processor.message == "Invalid coordinates."
+              render json: game, status: 400, message: turn_processor.message
+            else
+              render json: game, message: turn_processor.message
+            end
           elsif game.current_turn == "opponent" && player == game.opponent
             turn_processor = TurnProcessor.new(game, params[:shot][:target], player)
             turn_processor.run!
-            render json: game, message: turn_processor.message
+            if turn_processor.message == "Invalid coordinates."
+              render json: game, status: 400, message: turn_processor.message
+            else
+              render json: game, message: turn_processor.message
+            end
           else
             render json: game, status: 400, message: "Invalid move. It's your opponent's turn"
           end
