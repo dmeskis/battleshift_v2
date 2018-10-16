@@ -1,4 +1,5 @@
 class AiSpaceSelector
+  
   def initialize(target_board)
     @target_board = target_board
   end
