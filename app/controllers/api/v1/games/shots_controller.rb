@@ -10,6 +10,9 @@ module Api
             turn_processor.run!
             if turn_processor.message == "Invalid coordinates."
               render json: game, status: 400, message: turn_processor.message
+            elsif
+              game.player_1_board.locate_space(params[:target]).contents.is_sunk?
+              render json: game, message: "Your shot resulted in a Hit. Battleship sunk."
             else
               render json: game, message: turn_processor.message
             end
@@ -18,6 +21,9 @@ module Api
             turn_processor.run!
             if turn_processor.message == "Invalid coordinates."
               render json: game, status: 400, message: turn_processor.message
+            elsif
+              game.player_2_board.locate_space(params[:target]).contents.is_sunk?
+              render json: game, message: "Your shot resulted in a Hit. Battleship sunk."
             else
               render json: game, message: turn_processor.message
             end
@@ -29,3 +35,5 @@ module Api
     end
   end
 end
+
+# game.player_1_board.locate_space(params[:target]).contents.is_sunk?
