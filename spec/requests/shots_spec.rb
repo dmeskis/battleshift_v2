@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe "Api::V1::Shots" do
+  before :each do
+    @challenger = create(:user)
+    @opponent = create(:user)
+  end
   context "POST /api/v1/games/:id/shots" do
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
@@ -8,7 +12,9 @@ describe "Api::V1::Shots" do
     let(:game)    {
       create(:game,
         player_1_board: player_1_board,
-        player_2_board: player_2_board
+        player_2_board: player_2_board,
+        challenger: @challenger,
+        opponent: @opponent
       )
     }
 
@@ -18,8 +24,8 @@ describe "Api::V1::Shots" do
                      ship: sm_ship,
                      start_space: "A1",
                      end_space: "A2").run
-
-      headers = { "CONTENT_TYPE" => "application/json" }
+                     
+      headers = { "CONTENT_TYPE" => "application/json", "X-Api-Key" => @challenger.api_key}
       json_payload = {target: "A1"}.to_json
 
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
@@ -28,7 +34,7 @@ describe "Api::V1::Shots" do
 
       game = JSON.parse(response.body, symbolize_names: true)
 
-      expected_messages = "Your shot resulted in a Hit. The computer's shot resulted in a Miss."
+      expected_messages = "Your shot resulted in a Hit."
       player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
 
 
@@ -39,7 +45,7 @@ describe "Api::V1::Shots" do
     it "updates the message and board with a miss" do
       allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
 
-      headers = { "CONTENT_TYPE" => "application/json" }
+      headers = { "CONTENT_TYPE" => "application/json", "X-Api-Key" => @challenger.api_key}
       json_payload = {target: "A1"}.to_json
 
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
@@ -48,7 +54,7 @@ describe "Api::V1::Shots" do
 
       game = JSON.parse(response.body, symbolize_names: true)
 
-      expected_messages = "Your shot resulted in a Miss. The computer's shot resulted in a Miss."
+      expected_messages = "Your shot resulted in a Miss."
       player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
 
 
@@ -59,9 +65,14 @@ describe "Api::V1::Shots" do
     it "updates the message but not the board with invalid coordinates" do
       player_1_board = Board.new(1)
       player_2_board = Board.new(1)
-      game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
+      game = create(:game,
+                    player_1_board: player_1_board,
+                    player_2_board: player_2_board,
+                    challenger: @challenger,
+                    opponent: @opponent
+                    )
 
-      headers = { "CONTENT_TYPE" => "application/json" }
+      headers = { "CONTENT_TYPE" => "application/json", "X-Api-Key" => @challenger.api_key }
       json_payload = {target: "B1"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
