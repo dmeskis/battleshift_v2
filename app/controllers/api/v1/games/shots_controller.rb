@@ -12,6 +12,10 @@ module Api
               render json: game, status: 400, message: turn_processor.message
             elsif
               if turn_processor.message.include?("Hit")
+                if game.player_1_board.game_over?
+                  game.winner = game.challenger.email
+                  render json: game, message: turn_processor.message + " Game over."
+                end
                 game.player_1_board.locate_space(params[:target]).contents.is_sunk?
                 render json: game, message: "Your shot resulted in a Hit. Battleship sunk."
               end
@@ -25,6 +29,10 @@ module Api
               render json: game, status: 400, message: turn_processor.message
             elsif
               if turn_processor.message.include?("Hit")
+                if game.player_1_board.game_over?
+                  game.winner = game.opponent.email
+                  render json: game, message: turn_processor.message + " Game over."
+                end
                 game.player_2_board.locate_space(params[:target]).contents.is_sunk?
                 render json: game, message: "Your shot resulted in a Hit. Battleship sunk."
               end

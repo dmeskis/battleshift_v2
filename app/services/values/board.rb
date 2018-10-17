@@ -202,5 +202,21 @@ class Board
   def first_column?(coordinate)
     get_column(coordinate) == "1"
   end
-end
 
+  def find_all_ships
+    ships = []
+    @board.flatten.each do |space|
+      if space.values.first.contents.is_a?(Ship)
+        ships << space.values.first.contents
+      end
+    end
+    ships.uniq
+  end
+
+  def game_over?
+    find_all_ships.all? do |ship|
+      ship.is_sunk?
+    end
+  end
+
+end
