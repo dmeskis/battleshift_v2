@@ -214,8 +214,12 @@ class Board
   end
 
   def game_over?
-    find_all_ships.all? do |ship|
-      ship.is_sunk?
+    if find_all_ships == []
+      false
+    else
+      find_all_ships.all? do |ship|
+        ship.is_sunk?
+      end
     end
   end
 

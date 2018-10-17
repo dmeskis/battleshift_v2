@@ -1,5 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :message, :current_turn,
+  attributes :id, :message, :winner, :current_turn,
              :player_1_board, :player_2_board
 
   def player_1_board
