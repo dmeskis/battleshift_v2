@@ -18,4 +18,8 @@ class Game < ApplicationRecord
       player_1_board
     end
   end
+
+  def over?
+    winner != nil
+  end
 end

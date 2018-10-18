@@ -11,10 +11,9 @@ class TurnProcessor
   end
 
   def run!
-    begin
-      # Need to create a method that determines who's turn it is.
-      if @game.current_turn !=
-      if @game.winner != nil
+    if is_turn?
+      begin
+      if @game.over?
         @messages << "Invalid move. Game over."
         @status = 400
         game.save!
@@ -26,8 +25,12 @@ class TurnProcessor
         @game.winner = @player.email
       end
       game.save!
-    rescue InvalidAttack => e
-      @messages << e.message
+      rescue InvalidAttack => e
+        @messages << e.message
+        @status = 400
+      end
+    else
+      @messages << "Invalid move. It's your opponent's turn"
       @status = 400
     end
   end
@@ -38,7 +41,7 @@ class TurnProcessor
 
   private
 
-  attr_reader :game, :target
+  attr_reader :game, :target, :player
 
   def attack_opponent
     result = Shooter.fire!(board: opponent_or_challenger.board, target: target)
@@ -69,4 +72,13 @@ class TurnProcessor
     end
   end
 
+  def is_turn?
+    if game.current_turn == "challenger" && player == game.challenger
+      true
+    elsif game.current_turn == "opponent" && player == game.opponent
+      true
+    else
+      false
+    end
+  end
 end
