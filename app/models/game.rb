@@ -10,4 +10,16 @@ class Game < ApplicationRecord
 
   belongs_to :challenger, class_name: "User", foreign_key: :challenger_id
   belongs_to :opponent, class_name: "User", foreign_key: :opponent_id
+
+  def player_board
+    if current_turn == 'challenger'
+      player_2_board
+    elsif current_turn == 'opponent'
+      player_1_board
+    end
+  end
+
+  def over?
+    winner != nil
+  end
 end
