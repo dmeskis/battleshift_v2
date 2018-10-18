@@ -11,6 +11,9 @@ class TurnProcessor
   end
 
   def run!
+    if player_invalid?
+      return
+    end  
     if is_turn?
       begin
       if @game.over?
@@ -79,6 +82,13 @@ class TurnProcessor
       true
     else
       false
+    end
+  end
+  
+  def player_invalid?
+    if player == nil 
+      @messages << "Unauthorized"
+      @status = 401
     end
   end
 end
