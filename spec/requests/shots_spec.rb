@@ -5,6 +5,7 @@ describe "Api::V1::Shots" do
     @challenger = create(:user)
     @opponent = create(:user)
   end
+  
   context "POST /api/v1/games/:id/shots" do
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }

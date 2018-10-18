@@ -27,6 +27,7 @@ describe UserService do
       end
     end
   end
+  
   context "#all_users" do
     it "returns all users" do
       file = File.open("./fixtures/multiple_users.json")
