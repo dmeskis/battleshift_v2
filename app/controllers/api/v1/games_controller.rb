@@ -29,8 +29,7 @@ module Api
             player_2_turns: 0,
             current_turn: "challenger",
             challenger: challenger,
-            opponent: opponent
-          }
+            opponent: opponent }
         end 
         
         def challenger

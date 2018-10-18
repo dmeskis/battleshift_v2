@@ -3,8 +3,8 @@ class User < ApplicationRecord
   before_create :create_activation_digest, :create_api_key
 
   validates :name, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true
   validates_presence_of :password, on: :create
-  validates_presence_of :email
   enum activated: %w(unactivated activated)
 
   has_secure_password

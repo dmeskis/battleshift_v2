@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Guest user sees edits email for one user' do
+feature 'Guest user edits email for one user' do
   scenario 'only email address can be edited' do
     json_response = File.open("./fixtures/updated_users.json")
     stub_request(:get, "https://glacial-lake-90682.herokuapp.com/api/v1/users").

@@ -27,7 +27,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 
-SimpleCov.start "rails"
+
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
