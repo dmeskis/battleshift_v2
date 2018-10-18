@@ -24,6 +24,7 @@ describe 'on the landing page' do
       expect(page).to have_content("Logged in as #{username}")
       expect(page).to have_content("This account has not yet been activated. Please check your email.")
     end
+    
     it 'can fail to register if passwords do not match' do
       username = "Bob"
       email = "Bob@mail.com"

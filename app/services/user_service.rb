@@ -15,19 +15,16 @@ class UserService
   def update_user
     conn.patch "/api/v1/users/#{@filter[:id]}", { :email => @filter[:email] }
   end
-
-
   private
-
-  def conn
-    Faraday.new(url: ENV["ROOT_URL"]) do |faraday|
-      faraday.request  :url_encoded
-      faraday.response :logger
-      faraday.adapter Faraday.default_adapter
+    def conn
+      Faraday.new(url: ENV["ROOT_URL"]) do |faraday|
+        faraday.request  :url_encoded
+        faraday.response :logger
+        faraday.adapter Faraday.default_adapter
+      end
     end
-  end
 
-  def get_json(url)
-    JSON.parse(conn.get(url).body, symbolize_names: true)
-  end
+    def get_json(url)
+      JSON.parse(conn.get(url).body, symbolize_names: true)
+    end
 end

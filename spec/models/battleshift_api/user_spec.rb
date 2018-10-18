@@ -14,6 +14,7 @@ describe BattleshiftApi::User, type: :model do
         expect(user.single_user).to be_a(User)
       end
     end
+    
     context 'many_user' do
       it 'returns many users' do
         user = BattleshiftApi::User.new()

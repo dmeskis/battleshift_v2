@@ -5,6 +5,7 @@ RSpec.describe UserMailer, type: :mailer do
     @user = create(:user)
     @user.activation_token = User.new_token
   end
+  
   describe "account_activation" do
     let(:mail) { UserMailer.account_activation(@user) }
 
@@ -18,5 +19,4 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to match("Hi")
     end
   end
-
 end

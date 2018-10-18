@@ -10,7 +10,6 @@ describe 'user can place a ship' do
         end_space: "A3"
       }.to_json
 
-      # post "/api/v1/games/#{game.id}/ships?ship_size=3;start_space=A1;end_space=A3"
       post "/api/v1/games/#{game.id}/ships", params: {ship_size: 3,
                                                       start_space: "A1",
                                                       end_space: "A3"

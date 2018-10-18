@@ -12,6 +12,7 @@ describe 'as a visitor' do
       expect(page).to have_content("jbartlet@example.com")
 
     end
+    
     it 'shows multiple users name and email address' do
 
       file = File.open("./fixtures/multiple_users.json")
@@ -24,7 +25,6 @@ describe 'as a visitor' do
       expect(page).to have_content("jbarlet@example.com")
       expect(page).to have_content("Dylan Meskis")
       expect(page).to have_content("dmeskis@gmail.com")
-
     end
   end
 end

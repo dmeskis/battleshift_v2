@@ -2,7 +2,6 @@ module Api
   module V1
     module Games
       class ShipsController < ApiController
-
         def create
           @game = Game.find(params[:game_id])
           players_board
@@ -12,7 +11,6 @@ module Api
           elsif params[:ship_size].to_s == "2"
             remaining_ships = 0
           end
-          
           if ship_placer.run && params[:ship_size].to_s == "3"
             @game.save
             render json: @game, message: "Successfully placed ship with a size of #{params[:ship_size]}. You have #{remaining_ships} ship(s) to place with a size of #{size}."
@@ -25,13 +23,11 @@ module Api
         end
 
         private
-
           def ship_placer
             ShipPlacer.new( board: @board,
                             ship: Ship.new(params[:ship_size]),
                             start_space: params[:start_space],
-                            end_space: params[:end_space]
-                          )
+                            end_space: params[:end_space] )
           end
 
           def players_board

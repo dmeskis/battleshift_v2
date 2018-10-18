@@ -22,15 +22,13 @@ module Api
       
       private 
         def game_attributes
-          {
-            player_1_board: Board.new(4),
+          { player_1_board: Board.new(4),
             player_2_board: Board.new(4),
             player_1_turns: 0,
             player_2_turns: 0,
             current_turn: "challenger",
             challenger: challenger,
-            opponent: opponent
-          }
+            opponent: opponent }
         end 
         
         def challenger
