@@ -127,11 +127,10 @@ describe "Api::V1::Shots" do
       json_payload = {target: "A2"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
       body = JSON.parse(response.body, symbolize_names: true)
-      expect(response).to be_success
 
       body = JSON.parse(response.body, symbolize_names: true)
 
-      expect(body[:message]).to eq("Invalid move. Game over.")
+      expect(body[:message]).to include("Invalid move.")
     end
   end
 end
