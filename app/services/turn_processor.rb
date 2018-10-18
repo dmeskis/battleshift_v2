@@ -43,52 +43,51 @@ class TurnProcessor
   end
 
   private
+    attr_reader :game, :target, :player
 
-  attr_reader :game, :target, :player
+    def attack_opponent
+      result = Shooter.fire!(board: opponent_or_challenger.board, target: target)
+      @messages << "Your shot resulted in a #{result}."
+      unless @board.locate_space(target).contents == nil then
+        if @board.locate_space(target).contents.is_sunk?
+          @messages << "Battleship sunk."
+        end
+      end
+      player_turns
+    end
 
-  def attack_opponent
-    result = Shooter.fire!(board: opponent_or_challenger.board, target: target)
-    @messages << "Your shot resulted in a #{result}."
-    unless @board.locate_space(target).contents == nil then
-      if @board.locate_space(target).contents.is_sunk?
-        @messages << "Battleship sunk."
+    def opponent_or_challenger
+      if @player == game.challenger
+        Player.new(game.player_2_board)
+      elsif @player == game.opponent
+        Player.new(game.player_1_board)
       end
     end
-    player_turns
-  end
 
-  def opponent_or_challenger
-    if @player == game.challenger
-      Player.new(game.player_2_board)
-    elsif @player == game.opponent
-      Player.new(game.player_1_board)
+    def player_turns
+      if @player == game.challenger
+        game.player_1_turns += 1
+        game.current_turn = 'opponent'
+      elsif @player == game.opponent
+        game.player_2_turns += 1
+        game.current_turn = 'challenger'
+      end
     end
-  end
 
-  def player_turns
-    if @player == game.challenger
-      game.player_1_turns += 1
-      game.current_turn = 'opponent'
-    elsif @player == game.opponent
-      game.player_2_turns += 1
-      game.current_turn = 'challenger'
+    def is_turn?
+      if game.current_turn == "challenger" && player == game.challenger
+        true
+      elsif game.current_turn == "opponent" && player == game.opponent
+        true
+      else
+        false
+      end
     end
-  end
-
-  def is_turn?
-    if game.current_turn == "challenger" && player == game.challenger
-      true
-    elsif game.current_turn == "opponent" && player == game.opponent
-      true
-    else
-      false
+    
+    def player_invalid?
+      if player == nil 
+        @messages << "Unauthorized"
+        @status = 401
+      end
     end
-  end
-  
-  def player_invalid?
-    if player == nil 
-      @messages << "Unauthorized"
-      @status = 401
-    end
-  end
 end
