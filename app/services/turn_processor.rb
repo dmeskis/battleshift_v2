@@ -1,18 +1,34 @@
 class TurnProcessor
+  attr_reader :status
+
   def initialize(game, target, player)
     @game   = game
     @target = target
     @player = player
+    @board = game.player_board
     @messages = []
+    @status = 200
   end
 
   def run!
     begin
+      # Need to create a method that determines who's turn it is.
+      if @game.current_turn !=
+      if @game.winner != nil
+        @messages << "Invalid move. Game over."
+        @status = 400
+        game.save!
+        return
+      end
       attack_opponent
-      # ai_attack_back
+      if @board.game_over?
+        @messages << "Game over."
+        @game.winner = @player.email
+      end
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
+      @status = 400
     end
   end
 
@@ -27,22 +43,13 @@ class TurnProcessor
   def attack_opponent
     result = Shooter.fire!(board: opponent_or_challenger.board, target: target)
     @messages << "Your shot resulted in a #{result}."
+    unless @board.locate_space(target).contents == nil then
+      if @board.locate_space(target).contents.is_sunk?
+        @messages << "Battleship sunk."
+      end
+    end
     player_turns
   end
-
-  # def ai_attack_back
-  #   result = AiSpaceSelector.new(player.board).fire!
-  #   @messages << "The computer's shot resulted in a #{result}."
-  #   game.player_2_turns += 1
-  # end
-
-  # def player
-  #   if shooter == game.challenger
-  #     Player.new(game.player_1_board)
-  #   elsif shooter == game.opponent
-  #     Player.new(game.player_2_board)
-  #   end
-  # end
 
   def opponent_or_challenger
     if @player == game.challenger
