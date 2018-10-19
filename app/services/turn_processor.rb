@@ -19,16 +19,15 @@ class TurnProcessor
       if @game.over?
         @messages << "Invalid move. Game over."
         @status = 400
-        game.save!
+        @game.save!
         return
       end
       attack_opponent
       if @board.game_over?
         @messages << "Game over."
         @game.winner = @player.email
-        game.save!
       end
-      game.save!
+      @game.save!
       rescue InvalidAttack => e
         @messages << e.message
         @status = 400
