@@ -13,7 +13,7 @@ class TurnProcessor
   def run!
     if player_invalid?
       return
-    end  
+    end
     if is_turn?
       begin
       if @game.over?
@@ -26,6 +26,7 @@ class TurnProcessor
       if @board.game_over?
         @messages << "Game over."
         @game.winner = @player.email
+        game.save!
       end
       game.save!
       rescue InvalidAttack => e
@@ -83,9 +84,9 @@ class TurnProcessor
         false
       end
     end
-    
+
     def player_invalid?
-      if player == nil 
+      if player == nil
         @messages << "Unauthorized"
         @status = 401
       end
