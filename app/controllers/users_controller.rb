@@ -17,10 +17,12 @@ class UsersController < ApplicationController
     if user.update_user
       user = user.single_user
       flash[:success] = "Successfully updated #{user.name}."
+      redirect_to users_path
     else
       flash[:failure] = "Failed to update user."
+      redirect_to users_path
     end
-    redirect_to users_path
+    # redirect_to users_path
   end
 
   def new
